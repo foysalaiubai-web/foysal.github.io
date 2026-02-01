@@ -3,48 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fff5e4" />
     <title>Be My Valentine</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Your existing CSS -->
     <link rel="stylesheet" href="css/valentine.css" />
-
-    <!-- Extra styling for name -->
-    <style>
-      #valentineQuestion {
-        font-size: 28px;
-        text-align: center;
-        margin-top: 30px;
-      }
-
-      #nameText {
-        font-size: 40px;
-        font-weight: bold;
-        text-align: center;
-        color: #ff768d;
-        margin-bottom: 20px;
-      }
-    </style>
   </head>
 
   <body>
-    <div id="valentineQuestion">
-      <b>Will you be my valentine?</b>
+    <main class="valentine-hero">
+      <div id="valentineQuestion">
+        <b>Will you be my valentine?</b>
+      </div>
+
+      <!-- Big name below question -->
+      <div id="nameText">Tanzila..</div>
+
+      <div class="controls">
+        <button
+          class="answerButton"
+          onclick="location.href='thankyou.html'"
+          aria-label="Yes, I'll be your valentine"
+        >
+          Yes
+        </button>
+
+        <button class="answerButton" id="noButton" aria-label="No">
+          I no no wanna o(╥﹏╥)o
+        </button>
+      </div>
+
+      <img src="cat.gif" alt="cat asking question" class="responsive" />
+    </main>
+
+    <!-- Decorative animated flowers (pure CSS) -->
+    <div class="flower-layer" aria-hidden="true">
+      <span class="flower"></span>
+      <span class="flower"></span>
+      <span class="flower"></span>
+      <span class="flower"></span>
+      <span class="flower"></span>
+      <span class="flower"></span>
+      <span class="flower"></span>
+      <span class="flower"></span>
     </div>
-
-    <!-- Big name below question -->
-    <div id="nameText">Tanzila..</div>
-
-    <button class="answerButton" onclick="location.href='thankyou.html'">
-      Yes
-    </button>
-
-    <button class="answerButton" id="noButton">
-      I no no wanna o(╥﹏╥)o
-    </button>
-
-    <br /><br />
-
-    <img src="cat.gif" alt="cat asking question" class="responsive" />
 
     <script>
       document
@@ -59,6 +67,16 @@
           );
 
           yesButton.style.fontSize = currentFontSize + 10 + "px";
+          // small playful shake
+          yesButton.animate(
+            [
+              { transform: "translateX(0)" },
+              { transform: "translateX(-8px)" },
+              { transform: "translateX(8px)" },
+              { transform: "translateX(0)" },
+            ],
+            { duration: 400 }
+          );
         });
     </script>
   </body>

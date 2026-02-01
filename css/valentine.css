@@ -1,0 +1,118 @@
+:root{
+  --bg: #fff5e4;
+  --accent: #ff768d;
+  --accent-2: #ffb1c0;
+  --muted: #7a5a5a;
+  --glass: rgba(255,255,255,0.6);
+  --max-width: 860px;
+  --radius: 14px;
+  --transition: 240ms cubic-bezier(.2,.8,.2,1);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: var(--bg);
+  color: var(--accent);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+
+/* Soft vignette and subtle pattern */
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:0;
+  background: radial-gradient(ellipse at 20% 10%, rgba(255,182,193,0.08), transparent 15%),
+              radial-gradient(ellipse at 80% 90%, rgba(255,200,200,0.06), transparent 18%);
+  pointer-events:none;
+}
+
+/* Animated flower layer */
+.flower-layer{
+  position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+}
+.flower-layer .flower{
+  position:absolute; width:80px; height:80px; border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, var(--accent-2) 0 30%, var(--accent) 31% 60%, rgba(255,120,141,0.08) 61%);
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.06));
+  opacity:.9; transform-origin:center;
+  will-change: transform, opacity;
+  animation: float var(--d,9s) linear infinite;
+}
+
+/* position and variations for the flower instances */
+.flower-layer .flower:nth-child(1){ left:5%;  top:10%; --d:12s; width:100px; height:100px; --delay:0s; animation-delay:0s}
+.flower-layer .flower:nth-child(2){ left:80%; top:5%;  --d:18s; width:70px; height:70px; animation-delay:2s}
+.flower-layer .flower:nth-child(3){ left:60%; top:40%; --d:14s; width:90px; height:90px; animation-delay:4s}
+.flower-layer .flower:nth-child(4){ left:20%; top:60%; --d:16s; width:110px; height:110px; animation-delay:6s}
+.flower-layer .flower:nth-child(5){ left:85%; top:70%; --d:11s; width:80px; height:80px; animation-delay:8s}
+.flower-layer .flower:nth-child(6){ left:40%; top:80%; --d:20s; width:120px; height:120px; animation-delay:3s}
+.flower-layer .flower:nth-child(7){ left:10%; top:30%; --d:13s; width:60px; height:60px; animation-delay:5s}
+.flower-layer .flower:nth-child(8){ left:50%; top:15%; --d:17s; width:75px; height:75px; animation-delay:1s}
+
+@keyframes float{
+  0%{ transform: translate3d(0,0,0) rotate(0deg) scale(1); opacity:0.95 }
+  25%{ transform: translate3d(10px,-18px,0) rotate(6deg) scale(1.02); opacity:0.9 }
+  50%{ transform: translate3d(-6px,-36px,0) rotate(-6deg) scale(1); opacity:0.85 }
+  75%{ transform: translate3d(-12px,-18px,0) rotate(4deg) scale(0.98); opacity:0.9 }
+  100%{ transform: translate3d(0,0,0) rotate(0deg) scale(1); opacity:0.95 }
+}
+
+/* Hero container */
+.valentine-hero{
+  position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  min-height:100vh; padding:clamp(1rem,4vw,3rem);
+  max-width:var(--max-width); margin:0 auto; text-align:center;
+}
+
+#valentineQuestion{
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight:700;
+  color: #a64b63;
+  font-size: clamp(1.4rem, 4.5vw, 3rem);
+  line-height:1.05;
+  margin:0 0 .5rem 0;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+}
+
+#nameText{
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.8rem, 7vw, 4rem);
+  color: var(--accent);
+  margin-bottom:0.8rem;
+  text-transform: none; letter-spacing:0.5px; font-weight:700;
+}
+
+.responsive{ max-width:60vw; height:auto; border-radius:12px; box-shadow: 0 8px 30px rgba(166,75,99,0.08); margin-top:1rem }
+
+.controls{ display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap }
+
+.answerButton{
+  appearance:none; -webkit-appearance:none; border:0; cursor:pointer;
+  padding: .7rem 1.05rem; border-radius:10px; font-weight:600; font-family:inherit;
+  background: linear-gradient(180deg, var(--accent-2), var(--accent)); color:white;
+  box-shadow: 0 6px 18px rgba(166,75,99,0.12);
+  transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+  transform-origin:center; min-width:110px;
+}
+.answerButton:hover{ transform: translateY(-4px) scale(1.02); box-shadow: 0 12px 26px rgba(166,75,99,0.18) }
+.answerButton:active{ transform: translateY(-1px) scale(.995) }
+.answerButton:focus-visible{ outline:3px solid rgba(255,118,141,0.18); outline-offset:4px }
+
+/* smaller devices adjustments */
+@media (max-width:520px){
+  .responsive{ max-width:85vw }
+  .answerButton{ min-width:88px; padding:.6rem .9rem }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .flower-layer .flower{ animation:none; opacity:.9 }
+  .answerButton, .responsive{ transition:none }
+}
+
+/* small utility */
+b{ display:inline-block }
